@@ -1,40 +1,52 @@
 <div align="center">
 
+<img src="images/icon.png" alt="Markdown Run Terminal" width="128" height="128">
+
 # Markdown Run Terminal
 
-### Run code blocks from Markdown files directly in the terminal with a single click
+### A Visual Studio Code Extension
 
-[![VS Code Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-blue?logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=leiyihang.md-run-terminal)
+**Run code blocks from Markdown files directly in the terminal with a single click**
+
+[![VS Code](https://img.shields.io/badge/VS%20Code-Extension-007ACC?logo=visual-studio-code&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=leiyihang.md-run-terminal)
+[![Version](https://img.shields.io/badge/version-0.0.1-blue)](https://github.com/Alexhang1314520/Markdown-Run-Terminal/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?logo=github)](https://github.com/Alexhang1314520/Markdown-Run-Terminal)
 
 ---
 
-**Run** | **Type** | **50+ Languages** | **Multi-line Support**
+**Run** | **Type** | **50+ Languages** | **Multi-line Support** | **CodeLens & Preview**
+
+[Install from VS Code Marketplace](#installation) · [Report Bug](https://github.com/Alexhang1314520/Markdown-Run-Terminal/issues) · [Request Feature](https://github.com/Alexhang1314520/Markdown-Run-Terminal/issues)
 
 </div>
+
+---
+
+## Why This Extension?
+
+When reading documentation or tutorials in Markdown files, you often need to copy commands and paste them into the terminal. This extension eliminates that friction by adding **Run** and **Type** buttons directly to your code blocks.
+
+---
 
 ## Features
 
 ### Run & Type Buttons
 
-Add **Run** and **Type** buttons to every code block in your Markdown files:
+| Button | Action | Use Case |
+|--------|--------|----------|
+| **▶ Run** | Execute immediately | Quick command execution |
+| **⌨ Type** | Insert without executing | Review before running |
 
-| Button | Action |
-|--------|--------|
-| **Run** | Execute the command immediately in the terminal |
-| **Type** | Insert the command into the terminal without executing |
+### Works Everywhere in VS Code
 
-### Works in Both Views
-
-| View | Description |
-|------|-------------|
+| View | How It Works |
+|------|--------------|
 | **Editor** | CodeLens buttons appear above each code block |
-| **Preview** | Interactive buttons overlay on code blocks |
+| **Markdown Preview** | Interactive buttons overlay on code blocks |
 
 ### Multi-line Command Support
 
-Execute multiple commands sequentially with `&&` chaining:
+Execute multiple commands sequentially with automatic `&&` chaining:
 
 ```bash
 # Install dependencies
@@ -44,14 +56,13 @@ cd frontend && npm install && cd ..
 go mod download
 ```
 
-All commands execute in order. Comments and empty lines are automatically filtered.
+Comments and empty lines are automatically filtered.
 
-### Execution Animation
+### Real-time Execution Animation
 
-Visual feedback during execution:
 - Current command being executed
 - Progress indicator (e.g., 2/3)
-- Completion status with smooth animations
+- Smooth completion animation
 
 ---
 
@@ -62,156 +73,129 @@ Visual feedback during execution:
 | **Shell** | `bash` `sh` `zsh` `powershell` `cmd` `fish` |
 | **Scripting** | `python` `javascript` `typescript` `ruby` `perl` `php` `lua` |
 | **Compiled** | `go` `rust` `java` `kotlin` `swift` `c` `cpp` `csharp` |
-| **Tools** | `docker` `kubectl` `npm` `yarn` `git` `make` `curl` |
-| **Data** | `sql` `mysql` `postgresql` `sqlite` |
+| **DevOps** | `docker` `kubectl` `npm` `yarn` `git` `make` `curl` |
+| **Database** | `sql` `mysql` `postgresql` `sqlite` |
 
 ---
 
 ## Installation
 
-### Via VS Code
+### From VS Code (Recommended)
 
-1. Open VS Code
-2. Go to Extensions (`Cmd+Shift+X` / `Ctrl+Shift+X`)
+1. Open **VS Code**
+2. Press `Cmd+Shift+X` (macOS) or `Ctrl+Shift+X` (Windows/Linux)
 3. Search for **"Markdown Run Terminal"**
 4. Click **Install**
 
-### Via Command Line
+### From Command Line
 
 ```bash
 code --install-extension leiyihang.md-run-terminal
+```
+
+### From VSIX File
+
+```bash
+code --install-extension md-run-terminal-0.0.1.vsix
 ```
 
 ---
 
 ## Usage
 
-### Basic Usage
+### Quick Start
 
-1. Open any Markdown file (`.md`)
-2. Create a code block with a language identifier:
+1. Open any `.md` file in VS Code
+2. Look for **Run** and **Type** buttons on code blocks
+3. Click to execute!
+
+### Example
 
 ````markdown
 ```bash
 echo "Hello, World!"
+npm install
+npm start
 ```
 ````
 
-3. Click **Run** to execute or **Type** to insert into terminal
+### Multi-line Execution
 
-### Multi-line Commands
+All commands in a code block are joined with `&&` and executed sequentially:
 
-````markdown
 ```bash
-# Setup project
+# This will run as: git clone ... && cd repo && npm install
 git clone https://github.com/user/repo.git
 cd repo
 npm install
-npm run dev
 ```
-````
-
-All commands will be joined with `&&` and executed sequentially.
-
-### Language Examples
-
-**Python:**
-````markdown
-```python
-print("Hello from Python!")
-```
-````
-
-**JavaScript (Node.js):**
-````markdown
-```javascript
-console.log("Hello from Node.js!");
-```
-````
-
-**Shell commands without language specifier:**
-````markdown
-```
-ls -la
-pwd
-```
-````
 
 ---
 
-## Configuration
+## Extension Settings
+
+Open VS Code Settings (`Cmd+,` or `Ctrl+,`) and search for "Markdown Run Terminal":
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| `md-run-terminal.reuseTerminal` | `true` | Reuse existing terminal instead of creating a new one |
-| `md-run-terminal.supportedLanguages` | [see below] | Code block languages that show the run button |
-
-### Default Supported Languages
-
-```json
-[
-  "bash", "sh", "shell", "zsh", "console", "terminal",
-  "powershell", "ps1", "cmd", "batch",
-  "python", "py", "python3",
-  "javascript", "js", "node",
-  "typescript", "ts",
-  "ruby", "rb", "perl", "php", "lua",
-  "go", "rust", "java", "kotlin", "scala", "swift",
-  "c", "cpp", "csharp", "cs",
-  "sql", "mysql", "postgresql", "sqlite",
-  "make", "makefile", "dockerfile",
-  ""
-]
-```
+| `md-run-terminal.reuseTerminal` | `true` | Reuse existing terminal |
+| `md-run-terminal.supportedLanguages` | [50+ languages] | Languages that show buttons |
 
 ---
 
 ## How It Works
 
-| Language Type | Behavior |
-|---------------|----------|
-| **Shell** | Commands executed directly, joined with `&&` |
-| **Interpreted** | Wrapped with interpreter (e.g., `python3 -c "code"`) |
-| **Compiled** | Shows helpful message suggesting shell commands |
+| Language Type | Execution Method |
+|---------------|------------------|
+| **Shell** (`bash`, `sh`, etc.) | Direct execution with `&&` joining |
+| **Interpreted** (`python`, `js`, etc.) | Wrapped with interpreter |
+| **Compiled** (`go`, `rust`, etc.) | Helpful compile suggestion |
+
+**Examples:**
+- Python: `python3 -c "print('hello')"`
+- JavaScript: `node -e "console.log('hello')"`
+- Go: Suggests `go run main.go`
 
 ---
 
 ## Requirements
 
-- VS Code **1.85.0** or higher
-- Appropriate language runtimes for the languages you want to run
+- **VS Code** 1.85.0 or higher
+- Language runtimes for execution (Node.js, Python, Go, etc.)
 
 ---
 
 ## Known Issues
 
-- SQL code blocks are copied to clipboard instead of executed
-- Some compiled languages require saving to file before execution
+- SQL blocks copy to clipboard (requires database client)
+- Compiled languages need manual file save
 
 ---
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions welcome! Please submit a Pull Request.
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Create feature branch (`git checkout -b feature/Amazing`)
+3. Commit changes (`git commit -m 'Add Amazing'`)
+4. Push (`git push origin feature/Amazing`)
+5. Open Pull Request
 
 ---
 
 ## License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+[MIT License](LICENSE) © 2024 leiyihang
 
 ---
 
 <div align="center">
 
-**Made with love for developers**
+**Made for developers who work with Markdown**
 
-[Report Bug](https://github.com/Alexhang1314520/Markdown-Run-Terminal/issues) | [Request Feature](https://github.com/Alexhang1314520/Markdown-Run-Terminal/issues)
+Built with ❤️ for the VS Code community
+
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?logo=github)](https://github.com/Alexhang1314520/Markdown-Run-Terminal)
 
 </div>
