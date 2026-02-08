@@ -186,7 +186,7 @@ Contributions welcome! Please submit a Pull Request.
 
 ## License
 
-[MIT License](LICENSE) © 2024 leiyihang
+[MIT License](LICENSE) © 2026 LYH
 
 ---
 
