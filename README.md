@@ -12,23 +12,11 @@
 [![Version](https://img.shields.io/badge/version-0.0.1-blue)](https://github.com/Alexhang1314520/Markdown-Run-Terminal/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
----
+<img src="images/function.gif" alt="Markdown Run Terminal Demo" width="800">
 
 **Run** | **Type** | **50+ Languages** | **Multi-line Support** | **CodeLens & Preview**
 
 [Install from VS Code Marketplace](#installation) · [Report Bug](https://github.com/Alexhang1314520/Markdown-Run-Terminal/issues) · [Request Feature](https://github.com/Alexhang1314520/Markdown-Run-Terminal/issues)
-
-</div>
-
----
-
-## Demo
-
-<div align="center">
-
-<img src="images/function.gif" alt="Markdown Run Terminal Demo" width="800">
-
-*Click **Run** to execute commands instantly, or **Type** to insert them into terminal*
 
 </div>
 
