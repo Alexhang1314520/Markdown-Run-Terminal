@@ -1,0 +1,133 @@
+{
+  "name": "md-run-terminal",
+  "displayName": "Markdown Run Terminal",
+  "description": "Run code blocks from Markdown files directly in the terminal with a single click",
+  "version": "0.0.1",
+  "publisher": "leiyihang",
+  "author": {
+    "name": "leiyihang"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Alexhang1314520/Markdown-Run-Terminal"
+  },
+  "bugs": {
+    "url": "https://github.com/Alexhang1314520/Markdown-Run-Terminal/issues"
+  },
+  "homepage": "https://github.com/Alexhang1314520/Markdown-Run-Terminal#readme",
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#1a1a1a",
+    "theme": "dark"
+  },
+  "keywords": [
+    "markdown",
+    "terminal",
+    "run",
+    "execute",
+    "code block",
+    "shell",
+    "bash",
+    "command"
+  ],
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:markdown"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "md-run-terminal.runInTerminal",
+        "title": "Run in Terminal",
+        "icon": "$(play)"
+      }
+    ],
+    "markdown.markdownItPlugins": true,
+    "markdown.previewScripts": [
+      "./out/previewScript.js"
+    ],
+    "configuration": {
+      "title": "Markdown Run Terminal",
+      "properties": {
+        "md-run-terminal.supportedLanguages": {
+          "type": "array",
+          "default": [
+            "bash",
+            "sh",
+            "shell",
+            "zsh",
+            "console",
+            "terminal",
+            "powershell",
+            "ps1",
+            "cmd",
+            "batch",
+            "python",
+            "py",
+            "python3",
+            "javascript",
+            "js",
+            "node",
+            "typescript",
+            "ts",
+            "ruby",
+            "rb",
+            "perl",
+            "php",
+            "r",
+            "go",
+            "rust",
+            "java",
+            "kotlin",
+            "scala",
+            "swift",
+            "c",
+            "cpp",
+            "csharp",
+            "cs",
+            "lua",
+            "sql",
+            "mysql",
+            "postgresql",
+            "sqlite",
+            "make",
+            "makefile",
+            "dockerfile",
+            "yaml",
+            "json",
+            ""
+          ],
+          "description": "Code block languages that should show the run button"
+        },
+        "md-run-terminal.reuseTerminal": {
+          "type": "boolean",
+          "default": true,
+          "description": "Reuse existing terminal instead of creating a new one"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./ && cp src/previewScript.js out/",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.0"
+  }
+}
