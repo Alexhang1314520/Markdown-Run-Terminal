@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { parseMarkdownCodeBlocks, isRunnableCodeBlock, CodeBlock } from './markdownParser';
+import { parseMarkdownCodeBlocks, isRunnableCodeBlock } from './markdownParser';
 
 export class MarkdownCodeLensProvider implements vscode.CodeLensProvider {
     private _onDidChangeCodeLenses: vscode.EventEmitter<void> = new vscode.EventEmitter<void>();
@@ -33,7 +33,7 @@ export class MarkdownCodeLensProvider implements vscode.CodeLensProvider {
                 const codeLens = new vscode.CodeLens(range, {
                     title: '$(play) Run',
                     command: 'md-run-terminal.runInTerminal',
-                    arguments: [block.content],
+                    arguments: [block.content, block.language],
                     tooltip: 'Run this code block in terminal'
                 });
 

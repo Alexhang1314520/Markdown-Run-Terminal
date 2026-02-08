@@ -9,7 +9,7 @@ export interface CodeBlock {
 
 export function parseMarkdownCodeBlocks(document: vscode.TextDocument): CodeBlock[] {
     const text = document.getText();
-    const lines = text.split('\n');
+    const lines = text.split(/\r?\n/);
     const codeBlocks: CodeBlock[] = [];
 
     let inCodeBlock = false;
@@ -18,13 +18,16 @@ export function parseMarkdownCodeBlocks(document: vscode.TextDocument): CodeBloc
 
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
+        const trimmed = line.trim();
 
         // 检测代码块开始: ```language
-        const startMatch = line.match(/^```(\w*)$/);
+        const startMatch = trimmed.match(/^```(.*)$/);
         if (startMatch && !inCodeBlock) {
             inCodeBlock = true;
+            const info = startMatch[1].trim();
+            const language = info ? info.split(/\s+/)[0] : '';
             currentBlock = {
-                language: startMatch[1] || '',
+                language,
                 startLine: i,
             };
             contentLines = [];
@@ -32,7 +35,7 @@ export function parseMarkdownCodeBlocks(document: vscode.TextDocument): CodeBloc
         }
 
         // 检测代码块结束: ```
-        if (line.match(/^```$/) && inCodeBlock) {
+        if (trimmed === '```' && inCodeBlock) {
             inCodeBlock = false;
             codeBlocks.push({
                 language: currentBlock.language || '',

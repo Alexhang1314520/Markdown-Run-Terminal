@@ -111,6 +111,11 @@
           "type": "boolean",
           "default": true,
           "description": "Reuse existing terminal instead of creating a new one"
+        },
+        "md-run-terminal.debug": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable debug logging for troubleshooting (do not enable if commands may contain secrets)"
         }
       }
     }

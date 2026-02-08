@@ -27,33 +27,50 @@
             event.preventDefault();
             event.stopPropagation();
 
-            var command = button.getAttribute('data-command');
-            var language = button.getAttribute('data-language') || '';
             var action = button.getAttribute('data-action') || 'run';
-
-            if (command) {
-                // 解码 HTML 实体
-                var textarea = document.createElement('textarea');
-                textarea.innerHTML = command;
-                var decodedCommand = textarea.value;
-
-                // 使用 base64 编码命令，避免 URL 特殊字符问题（如 & 被误解为参数分隔符）
-                // 先 encodeURIComponent 处理 Unicode，再 btoa 编码
-                var base64Command = btoa(unescape(encodeURIComponent(decodedCommand)));
-
-                // 构建 vscode:// URI 并触发
-                // 格式: vscode://leiyihang.md-run-terminal/{action}?cmd=base64_command&lang=language
-                var vsCodeUri = 'vscode://leiyihang.md-run-terminal/' + action + '?cmd=' + base64Command + '&lang=' + encodeURIComponent(language);
-
-                console.log('MD Run Terminal: Triggering URI:', vsCodeUri);
-
-                // 通过隐藏链接触发 URI
-                hiddenLink.href = vsCodeUri;
-                hiddenLink.click();
-
-                // 视觉反馈
-                showFeedback(button, true, action, decodedCommand);
+            if (action !== 'run' && action !== 'type') {
+                action = 'run';
             }
+
+            // 只响应扩展生成的 wrapper，避免被伪造按钮诱导执行
+            var wrapper = button.closest ? button.closest('.md-run-terminal-wrapper') : null;
+            if (!wrapper) {
+                var p = button.parentElement;
+                while (p) {
+                    if (p.classList && p.classList.contains('md-run-terminal-wrapper')) {
+                        wrapper = p;
+                        break;
+                    }
+                    p = p.parentElement;
+                }
+            }
+            if (!wrapper) return;
+            if (wrapper.getAttribute('data-md-run-terminal') !== '1') return;
+
+            var nonce = wrapper.getAttribute('data-md-run-terminal-nonce') || '';
+            if (!nonce) return;
+
+            var language = wrapper.getAttribute('data-language') || '';
+
+            // 从 code 元素读取可见文本，避免信任 data-command
+            var codeEl = wrapper.querySelector('pre code') || wrapper.querySelector('code');
+            var decodedCommand = codeEl ? (codeEl.textContent || '') : '';
+            if (!decodedCommand) return;
+
+            // 使用 base64 编码命令，避免 URL 特殊字符问题（如 & 被误解为参数分隔符）
+            // 先 encodeURIComponent 处理 Unicode，再 btoa 编码
+            var base64Command = btoa(unescape(encodeURIComponent(decodedCommand)));
+
+            // 构建 vscode:// URI 并触发
+            // 格式: vscode://leiyihang.md-run-terminal/{action}?cmd=base64_command&lang=language&nonce=...
+            var vsCodeUri = 'vscode://leiyihang.md-run-terminal/' + action + '?cmd=' + base64Command + '&lang=' + encodeURIComponent(language) + '&nonce=' + encodeURIComponent(nonce);
+
+            // 通过隐藏链接触发 URI
+            hiddenLink.href = vsCodeUri;
+            hiddenLink.click();
+
+            // 视觉反馈
+            showFeedback(button, true, action, decodedCommand);
         }
     });
 
