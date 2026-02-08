@@ -22,6 +22,18 @@
 
 ---
 
+## Demo
+
+<div align="center">
+
+<img src="images/function.gif" alt="Markdown Run Terminal Demo" width="800">
+
+*Click **Run** to execute commands instantly, or **Type** to insert them into terminal*
+
+</div>
+
+---
+
 ## Why This Extension?
 
 When reading documentation or tutorials in Markdown files, you often need to copy commands and paste them into the terminal. This extension eliminates that friction by adding **Run** and **Type** buttons directly to your code blocks.
