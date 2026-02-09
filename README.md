@@ -80,24 +80,23 @@ Comments and empty lines are automatically filtered.
 
 ## Installation
 
-### From VS Code (Recommended)
+### From VS Code Marketplace (Coming Soon)
 
 1. Open **VS Code**
 2. Press `Cmd+Shift+X` (macOS) or `Ctrl+Shift+X` (Windows/Linux)
 3. Search for **"Markdown Run Terminal"**
 4. Click **Install**
 
-### From Command Line
+### From GitHub Releases
+
+1. Download the latest `.vsix` file from [Releases](https://github.com/Alexhang1314520/Markdown-Run-Terminal/releases)
+2. Install via command line:
 
 ```bash
-code --install-extension leiyihang.md-run-terminal
+code --install-extension md-run-terminal-x.x.x.vsix
 ```
 
-### From VSIX File
-
-```bash
-code --install-extension md-run-terminal-0.0.1.vsix
-```
+Or install in VS Code: `Extensions` → `...` → `Install from VSIX...`
 
 ---
 
